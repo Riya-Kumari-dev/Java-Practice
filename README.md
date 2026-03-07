@@ -18,7 +18,7 @@ I am consistently improving my programming skills by building logic, solving pro
 
 ## 📂 Repository Structure
 
-'''
+```
 Java-Practice
 |
 |--- ifelse
@@ -30,7 +30,7 @@ Java-Practice
 |--- loops
 |--- patternprinting
 |--- README.md
-'''
+```
 
 ---
 
