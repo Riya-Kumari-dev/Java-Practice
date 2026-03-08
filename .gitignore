@@ -4,3 +4,9 @@
 
 # ignore Intellij files
 .idea/
+
+#ignore output folder
+out/
+#ignore compiled files
+
+*.class
