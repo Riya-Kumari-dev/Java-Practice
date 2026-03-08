@@ -1,3 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+
+# ignore Intellij files
+.idea/
+
+#ignore compiled files
+out/
+*.class
