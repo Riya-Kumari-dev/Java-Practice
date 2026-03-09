@@ -8,11 +8,11 @@ I am consistently improving my programming skills by building logic, solving pro
 
 ## 🚀 Skills I Am Building 
 - Java Fundamentals
-- Conditional Statements (If else)
-- Loops
-- Pattern Printing
-- Object Oriented Programming
-- Data Structures *(Upcoming)*
+- ✅ Conditional Statements (If else)
+- ✅ Loops
+- ✅ Pattern Printing
+- 🔄️ Object Oriented Programming (In progress)
+- ➡️ Data Structures *(Upcoming)*
 
 ---
 
@@ -22,13 +22,15 @@ I am consistently improving my programming skills by building logic, solving pro
 Java-Practice
 |
 |--- ifelse
-|    |-- Absolute.java
-|    |-- AreaAndParameterOfRectangle.java
-|    |-- GreatestAmongThree.java
-|    |-- OddEven.java
-|    |-- TriangleValidity.java
+|    
 |--- loops
+|     |-- forloop
+|     |-- whileloop
+|     |-- dowhile
 |--- patternprinting
+|     |-- alphabets
+|     |-- numbers
+|     |-- shapes
 |--- README.md
 ```
 
