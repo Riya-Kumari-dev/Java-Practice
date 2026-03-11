@@ -11,6 +11,7 @@ I am consistently improving my programming skills by building logic, solving pro
 - ✅ Conditional Statements (If else)
 - ✅ Loops
 - ✅ Pattern Printing
+- ✅ Methods
 - 🔄️ Object Oriented Programming (In progress)
 - ➡️ Data Structures *(Upcoming)*
 
