@@ -21,17 +21,23 @@ I am consistently improving my programming skills by building logic, solving pro
 
 ```
 Java-Practice
-|
-|--- ifelse
-|    
-|--- loops
-|     |-- forloop
-|     |-- whileloop
-|     |-- dowhile
-|--- patternprinting
-|     |-- alphabets
-|     |-- numbers
-|     |-- shapes
+|--- concepts 
+|---src
+|     |--- ifelse
+|     |    
+|     |--- loops
+|     |     |-- forloop
+|     |     |-- whileloop
+|     |     |-- dowhile
+|     |--- patternprinting
+|     |     |-- alphabets
+|     |     |-- numbers
+|     |     |-- shapes
+|     |--- methods
+|     |--- OOPs
+|     |     |--- basic
+|     |     |--- constructor
+|     |     |--- Encapsulation
 |--- README.md
 ```
 
