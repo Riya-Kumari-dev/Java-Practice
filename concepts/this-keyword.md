@@ -11,7 +11,7 @@
 
 1️⃣ When instance variable and local variable have the same name, we use this.
 ``` 
-class Student{
+class Student{ 
     int age;
     void setAge(int age){
         this.age = age;
