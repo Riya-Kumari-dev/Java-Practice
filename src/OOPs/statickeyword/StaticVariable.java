@@ -16,6 +16,6 @@ public class StaticVariable {
         System.out.println(Student.school); // We can access using class name
 
         Student s2 = new Student(23, "Aditi");
-        System.out.println(s.school + "   "+s2.school); // same for all the objects of Student class becuase only one copy is created.
+        System.out.println(s.school + "   "+s2.school); // same for all the objects of Student class becuase only one copy is created..
     }
 }
