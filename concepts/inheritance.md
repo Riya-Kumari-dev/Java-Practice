@@ -27,7 +27,7 @@ Java supports Multilevel inheritance
 ## 🔒 Private Members
 
 - Private variables and private methods are not inherited
-- They dan only be assessed inside the same class.
+- They can only be assessed inside the same class.
 
 ## Method Overriding 
 
