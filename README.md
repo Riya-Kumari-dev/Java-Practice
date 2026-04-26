@@ -38,6 +38,9 @@ Java-Practice
 |     |     |--- basic
 |     |     |--- constructor
 |     |     |--- Encapsulation
+|     |     |--- Inheritance
+|     |     |--- Polymorphism
+|     |     |--- Abstraction
 |--- README.md
 ```
 
@@ -51,5 +54,5 @@ To become a **strong Java developer** by mastering core concepts and building re
 
 ## 👩‍💻 About Me
 
-BCA student passionate about programming, problem solving, and continuous learning.
+BCA student passionate about programming, problem-solving, and continuous learning.
      
