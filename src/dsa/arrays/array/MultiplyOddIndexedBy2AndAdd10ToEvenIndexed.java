@@ -1,4 +1,4 @@
-package dsa.array;
+package dsa.arrays.array;
 
 public class MultiplyOddIndexedBy2AndAdd10ToEvenIndexed {
     static void main(String[] args){

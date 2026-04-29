@@ -1,4 +1,4 @@
-package dsa.array;
+package dsa.arrays.array;
 
 public class PassByReference {
     static void main(String[] args) {
