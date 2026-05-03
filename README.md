@@ -13,7 +13,7 @@ I am consistently improving my programming skills by building logic, solving pro
 - ✅ Pattern Printing
 - ✅ Methods
 - 🔄️ Object Oriented Programming (In progress)
-- ➡️ Data Structures *(Upcoming)*
+- 🔄️ Data Structures (In progress)
 
 ---
 
@@ -55,4 +55,3 @@ To become a **strong Java developer** by mastering core concepts and building re
 ## 👩‍💻 About Me
 
 BCA student passionate about programming, problem-solving, and continuous learning.
-     
