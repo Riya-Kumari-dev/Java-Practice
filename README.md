@@ -38,9 +38,14 @@ Java-Practice
 |     |     |--- basic
 |     |     |--- constructor
 |     |     |--- Encapsulation
-|     |     |--- Inheritance
-|     |     |--- Polymorphism
+|     |     |--- inheritance
+|     |     |--- polymorphism
 |     |     |--- Abstraction
+|     |--- exceptionhandling
+|     |--- dsa
+|     |     |--- arrays
+|     |     |--- strings
+|     |     |--- collections
 |--- README.md
 ```
 
