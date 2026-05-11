@@ -46,6 +46,8 @@ Java-Practice
 |     |     |--- arrays
 |     |     |--- strings
 |     |     |--- collections
+|     |     |--- recursion
+|     |     |--- sorting
 |--- README.md
 ```
 
