@@ -12,7 +12,7 @@ I am consistently improving my programming skills by building logic, solving pro
 - ✅ Loops
 - ✅ Pattern Printing
 - ✅ Methods
-- 🔄️ Object Oriented Programming (In progress)
+- ✅ Object Oriented Programming (In progress)
 - 🔄️ Data Structures (In progress)
 
 ---
