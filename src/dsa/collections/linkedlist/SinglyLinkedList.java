@@ -4,16 +4,16 @@ public class SinglyLinkedList{
     private Node head;
     private Node tail;
     private int size = 0;
-    boolean isEmpty(){
+    public  boolean isEmpty(){
         return head == null;
     }
-    void setHead(Node head){
+    public void setHead(Node head){
         this.head = head;
     }
-    Node getHead(){
+    public Node getHead(){
         return this.head;
     }
-    void addAtTail(int val){
+    public void addAtTail(int val){
         Node c = new Node(val);
         if(isEmpty()){
             tail = c;
@@ -25,7 +25,7 @@ public class SinglyLinkedList{
         }
         size++;
     }
-    void addAtHead(int val){
+    public void addAtHead(int val){
         Node c = new Node(val);
         if(isEmpty()) {
             tail = c;
@@ -37,7 +37,7 @@ public class SinglyLinkedList{
         }
         size++;
     }
-    void add(int idx, int val) throws Exception{
+    public void add(int idx, int val) throws Exception{
         if(idx == size) {
             addAtTail(val);
             return;
@@ -58,7 +58,7 @@ public class SinglyLinkedList{
         temp.next = d;
         size++;
     }
-    void removeFromEnd() throws Exception{
+    public void removeFromEnd() throws Exception{
         if(isEmpty()) {
             throw new Exception("Linked list is empty");
         }
@@ -75,7 +75,7 @@ public class SinglyLinkedList{
         }
         size--;
     }
-    void removeFromHead() throws Exception{
+    public void removeFromHead() throws Exception{
         if(isEmpty()) {
             throw new Exception("Linked list is empty");
         }
@@ -83,7 +83,7 @@ public class SinglyLinkedList{
         else head = head.next;
         size--;
     }
-    void remove(int idx) throws Exception{
+    public void remove(int idx) throws Exception{
         if(isEmpty()) {
             throw new Exception("Linked list is empty");
         }
@@ -110,7 +110,7 @@ public class SinglyLinkedList{
         }
         size--;
     }
-    int get(int idx) throws Exception{
+    public int get(int idx) throws Exception{
         if(idx == size-1) {
             return tail.val;
         }
@@ -123,7 +123,7 @@ public class SinglyLinkedList{
         }
         return temp.val;
     }
-    Node getNode(int idx) throws Exception{
+    public Node getNode(int idx) throws Exception{
         if(idx == size-1) {
             return tail;
         }
@@ -136,7 +136,7 @@ public class SinglyLinkedList{
         }
         return temp;
     }
-    void set(int idx, int val) throws Exception{
+    public void set(int idx, int val) throws Exception{
         if(idx == size-1) {
             tail.val = val;
         }
@@ -149,10 +149,10 @@ public class SinglyLinkedList{
         }
         temp.val = val;
     }
-    void size(){
+    public void size(){
         System.out.println("Length of the linked list is "+size);
     }
-    void display(){
+    public void display(){
         Node temp = head;
         System.out.print("[");
         while(temp!=null){

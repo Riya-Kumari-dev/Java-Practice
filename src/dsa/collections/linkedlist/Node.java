@@ -1,9 +1,9 @@
 package dsa.collections.linkedlist;
 
 public class Node{
-    int val;
-    Node next;// default null
-    Node(int val){
+    public int val;
+    public Node next;// default null
+    public Node(int val){
         this.val  = val;
     }
 }
