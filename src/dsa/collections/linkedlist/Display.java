@@ -1,12 +1,5 @@
 package dsa.collections.linkedlist;
 
-class Node{
-    int val;
-    Node next;// default null
-    Node(int val){
-        this.val  = val;
-    }
-}
 public class Display {
     static void main(String[] args) {
         Node a = new Node(2);
