@@ -12,7 +12,7 @@ I am consistently improving my programming skills by building logic, solving pro
 - ✅ Loops
 - ✅ Pattern Printing
 - ✅ Methods
-- ✅ Object Oriented Programming (In progress)
+- ✅ Object-Oriented Programming (In progress)
 - 🔄️ Data Structures (In progress)
 
 ---
@@ -29,11 +29,14 @@ Java-Practice
 |     |     |-- forloop
 |     |     |-- whileloop
 |     |     |-- dowhile
+|     |     
 |     |--- patternprinting
 |     |     |-- alphabets
 |     |     |-- numbers
 |     |     |-- shapes
+|     | 
 |     |--- methods
+|     |
 |     |--- OOPs
 |     |     |--- basic
 |     |     |--- constructor
@@ -41,11 +44,17 @@ Java-Practice
 |     |     |--- inheritance
 |     |     |--- polymorphism
 |     |     |--- Abstraction
+|     |    
 |     |--- exceptionhandling
+|     |
 |     |--- dsa
 |     |     |--- arrays
 |     |     |--- strings
 |     |     |--- collections
+|     |     |     |--- arraylist
+|     |     |     |--- linkedlist
+|     |     |     |--- queue
+|     |     |     |--- stacks
 |     |     |--- recursion
 |     |     |--- sorting
 |--- README.md
