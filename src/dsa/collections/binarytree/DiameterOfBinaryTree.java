@@ -1,7 +1,6 @@
 package dsa.collections.binarytree;
 
 import static dsa.collections.binarytree.Implementation.display;
-import static dsa.collections.binarytree.Level.level;
 
 public class DiameterOfBinaryTree {
     static void main(String[] args) {
@@ -29,12 +28,33 @@ public class DiameterOfBinaryTree {
         System.out.println("Diameter of Given Binary Tree : "+diameterOfBinaryTree(a));
 
     }
-    // TC = O(n^2)
+
+    // TC = O(n)
     private static int diameterOfBinaryTree(Node root) {
-        if(root == null) return 0;
-        int myDia = level(root.left) + level(root.right);
-        int leftDia = diameterOfBinaryTree(root.left);
-        int rightDia = diameterOfBinaryTree(root.right);
-        return Math.max(myDia, Math.max(leftDia, rightDia));
+        int[] maxDia = {-1}; // to mark the diameter
+        levels(root, maxDia);
+        return maxDia[0];
     }
+
+    private static int levels(Node root, int[] maxDia) {
+        if(root == null){
+            return 0;
+        }
+        int leftLevel = levels(root.left, maxDia);
+        int rightLevel = levels(root.right, maxDia);
+
+        // mark the diameter across the current root
+        int dia = leftLevel + rightLevel;
+        maxDia[0] = Math.max(dia, maxDia[0]);
+        return 1 + Math.max(leftLevel, rightLevel);
+    }
+
+    // TC = O(n^2)
+//    private static int diameterOfBinaryTree(Node root) {
+//        if(root == null) return 0;
+//        int myDia = level(root.left) + level(root.right);
+//        int leftDia = diameterOfBinaryTree(root.left);
+//        int rightDia = diameterOfBinaryTree(root.right);
+//        return Math.max(myDia, Math.max(leftDia, rightDia));
+//    }
 }
