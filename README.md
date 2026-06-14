@@ -55,6 +55,7 @@ Java-Practice
 |     |     |     |--- linkedlist
 |     |     |     |--- queue
 |     |     |     |--- stacks
+|     |     |     |--- binarytree
 |     |     |--- recursion
 |     |     |--- sorting
 |--- README.md
