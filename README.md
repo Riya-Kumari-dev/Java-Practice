@@ -56,6 +56,7 @@ Java-Practice
 |     |     |     |--- queue
 |     |     |     |--- stacks
 |     |     |     |--- binarytree
+|     |     |     |--- binarysearchtree
 |     |     |--- recursion
 |     |     |--- sorting
 |--- README.md
