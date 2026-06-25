@@ -57,6 +57,8 @@ Java-Practice
 |     |     |     |--- stacks
 |     |     |     |--- binarytree
 |     |     |     |--- binarysearchtree
+|     |     |     |--- hashset
+|     |     |     |--- hashmap
 |     |     |--- recursion
 |     |     |--- sorting
 |--- README.md
