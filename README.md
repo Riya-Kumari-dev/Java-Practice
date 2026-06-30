@@ -59,6 +59,7 @@ Java-Practice
 |     |     |     |--- binarysearchtree
 |     |     |     |--- hashset
 |     |     |     |--- hashmap
+|     |     |     |--- priorityqueue
 |     |     |--- recursion
 |     |     |--- sorting
 |--- README.md
