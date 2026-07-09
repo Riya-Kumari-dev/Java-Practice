@@ -62,6 +62,8 @@ Java-Practice
 |     |     |     |--- priorityqueue
 |     |     |--- recursion
 |     |     |--- sorting
+|     |     |--- prefixsum
+|     |     |--- slidingwindow
 |--- README.md
 ```
 
