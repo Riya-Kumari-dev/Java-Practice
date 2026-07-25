@@ -22,6 +22,8 @@ public class TargetSum {
         int target = sc.nextInt();
         System.out.println("Total number of different expressions that can build from "+ Arrays.toString(arr)+" which evaluates to "+target+" is "+findTargetSumWays(arr, target));
     }
+
+    // tabulation
     private static int findTargetSumWays(int[] arr, int target) {
         // i ->  0 to n-1 and target -> -absSum to +absSum
         // => but index can't be negative thus adding both sides absSum
@@ -29,21 +31,46 @@ public class TargetSum {
         int absSum = 0;
         for(int ele : arr) absSum += Math.abs(ele);
 
+        if(Math.abs(target) > absSum) return 0;
+
         int[][] dp = new int[arr.length][2*absSum+1];
-        return helper(0, arr,absSum, 0, target, dp);
+        dp[0][arr[0] + absSum]++;
+        dp[0][-arr[0]+absSum]++;
 
-    }
-    private static int helper(int i, int[] arr,int absSum, int sum, int target, int[][] dp){
-        if(i == arr.length) {
-            if(target == sum) return 1; // 1 valid way
-            else return 0;
+        for(int i=1; i<dp.length; i++){
+            for(int j=-absSum; j<=absSum; j++){
+                if(dp[i-1][j+absSum] == 0) continue;
+                dp[i][j+arr[i]+absSum] += dp[i-1][j+absSum];
+                dp[i][j-arr[i]+absSum] += dp[i-1][j+absSum];
+            }
         }
-        if(dp[i][sum + absSum] != 0) return dp[i][sum+absSum]; // so that index not negative
-        int plus = helper(i+1, arr, absSum,sum-arr[i], target, dp);
-        int minus = helper(i+1, arr, absSum, sum+arr[i], target, dp);
-        return dp[i][sum+absSum] = plus + minus;
+        return dp[arr.length-1][target+absSum];
     }
 
+    // memoization
+//    private static int findTargetSumWays(int[] arr, int target) {
+//        // i ->  0 to n-1 and target -> -absSum to +absSum
+//        // => but index can't be negative thus adding both sides absSum
+//        // target -> 0 to 2*absSum
+//        int absSum = 0;
+//        for(int ele : arr) absSum += Math.abs(ele);
+//
+//        int[][] dp = new int[arr.length][2*absSum+1];
+//        return helper(0, arr,absSum, 0, target, dp);
+//
+//    }
+//    private static int helper(int i, int[] arr,int absSum, int sum, int target, int[][] dp){
+//        if(i == arr.length) {
+//            if(target == sum) return 1; // 1 valid way
+//            else return 0;
+//        }
+//        if(dp[i][sum + absSum] != 0) return dp[i][sum+absSum]; // so that index not negative
+//        int plus = helper(i+1, arr, absSum,sum-arr[i], target, dp);
+//        int minus = helper(i+1, arr, absSum, sum+arr[i], target, dp);
+//        return dp[i][sum+absSum] = plus + minus;
+//    }
+
+    // recursion
 //    private static int findTargetSumWays(int[] arr, int target) {
 //        return helper(0, arr, target);
 //    }

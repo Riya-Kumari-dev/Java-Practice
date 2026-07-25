@@ -20,33 +20,53 @@ public class SubsetSum {
         else System.out.println("No, " + Arrays.toString(arr) + " has not any subset whose sum equals to " + target);
     }
 
-    // memoization
-    // TC = O(n*target) , AS = O(n*target)
+    // tabulation
     public static boolean isSubsetSum(int[] arr, int target) {
         int n = arr.length;
         // idx -> 0 to n-1 and target -> target to 0
-        int[][] dp = new int[n][target+1]; // integer type(no boolean type) because we want something different to understand whether ans is marked or not
+        int[][] dp = new int[n][target+1];
         for (int i = 0; i < dp.length; i++) {
-            for (int j = 0; j < dp[0].length; j++) dp[i][j] = -1;
+            for (int j = 0; j < dp[0].length; j++) {
+                boolean ans;
+                boolean skip = ((i>0) ? (dp[i-1][j] == 1) : j==0); // skip = helper(arr, target, idx - 1, dp);
+                if(j-arr[i] < 0) ans = skip;
+                else{
+                    boolean pick = ((i>0) ? (dp[i-1][j-arr[i]] ==1) : j==0); // pick = helper(arr, target - arr[idx], idx - 1, dp);
+                    ans = pick || skip;
+                }
+                dp[i][j] = (ans) ? 1 : 0;
+            }
         }
-        return helper(arr, target, 0, dp);
+        return dp[n-1][target] == 1;
     }
 
-    public static boolean helper(int[] arr, int target, int idx, int[][] dp) {
-        if (idx >= arr.length) {
-            return target == 0;
-        }
-        if (dp[idx][target] != -1) return dp[idx][target] == 1;
-        boolean ans;
-        boolean skip = helper(arr, target, idx + 1, dp);
-        if (target - arr[idx] < 0) ans = skip; // only for +ve numbers
-        else {
-            boolean pick = helper(arr, target - arr[idx], idx + 1, dp);
-            ans = pick || skip;
-        }
-        dp[idx][target] = (ans) ? 1 : 0;
-        return ans;
-    }
+    // memoization
+    // TC = O(n*target) , AS = O(n*target)
+//    public static boolean isSubsetSum(int[] arr, int target) {
+//        int n = arr.length;
+//        // idx -> 0 to n-1 and target -> target to 0
+//        int[][] dp = new int[n][target+1]; // integer type(no boolean type) because we want something different to understand whether ans is marked or not
+//        for (int i = 0; i < dp.length; i++) {
+//            for (int j = 0; j < dp[0].length; j++) dp[i][j] = -1;
+//        }
+//        return helper(arr, target, 0, dp);
+//    }
+
+//    public static boolean helper(int[] arr, int target, int idx, int[][] dp) {
+//        if (idx >= arr.length) {
+//            return target == 0;
+//        }
+//        if (dp[idx][target] != -1) return dp[idx][target] == 1;
+//        boolean ans;
+//        boolean skip = helper(arr, target, idx + 1, dp);
+//        if (target - arr[idx] < 0) ans = skip; // only for +ve numbers
+//        else {
+//            boolean pick = helper(arr, target - arr[idx], idx + 1, dp);
+//            ans = pick || skip;
+//        }
+//        dp[idx][target] = (ans) ? 1 : 0;
+//        return ans;
+//    }
 
 
     // recursion

@@ -24,22 +24,43 @@ public class UnboundedKnapsack {
 //    Your task is to fill the knapsack in such a way that we can get the maximum profit. Return the maximum profit.
 //    Note: Each item can be taken any number of times.
 
-    // TC = O(n*W) and AS = O(n*w)
+    // tabulation
     private static int knapsack(int w, int[] val, int[] wt) {
         // i -> 0 to n-1 and W -> W to 0
         int n = val.length;
         int[][] dp = new int[n][w+1];
         for(int i=0; i<dp.length; i++){
-            for(int j=0; j<dp[0].length; j++) dp[i][j] = -1;
+            for(int j=0; j<dp[0].length; j++){
+                int skip = (i>0) ? dp[i-1][j] : 0; // skip =  profit(capacity, val, wt, idx-1, dp);
+                if(wt[i] > j) dp[i][j] = skip;
+                else{
+                    // pick = val[idx] + profit(capacity-wt[idx], val, wt, idx, dp);
+                    int pick = val[i];
+                    pick += dp[i][j-wt[i]];
+                    dp[i][j] = Math.max(pick, skip);
+                }
+            }
         }
-        return profit(w, val, wt, 0, dp);
+        return dp[n-1][w];
     }
-    private static int profit(int capacity, int[] val, int[] wt, int idx, int[][] dp){
-        if(idx == val.length) return 0;
-        if(dp[idx][capacity] != -1) return dp[idx][capacity];
-        int skip = profit(capacity, val, wt, idx+1, dp);
-        if(capacity < wt[idx]) return dp[idx][capacity] = skip;
-        int pick = val[idx] + profit(capacity-wt[idx], val, wt, idx, dp); // unlimited son no idx+1
-        return dp[idx][capacity] = Math.max(pick, skip);
-    }
+
+    // memoization
+    // TC = O(n*W) and AS = O(n*w)
+//    private static int knapsack(int w, int[] val, int[] wt) {
+//        // i -> 0 to n-1 and W -> W to 0
+//        int n = val.length;
+//        int[][] dp = new int[n][w+1];
+//        for(int i=0; i<dp.length; i++){
+//            for(int j=0; j<dp[0].length; j++) dp[i][j] = -1;
+//        }
+//        return profit(w, val, wt, 0, dp);
+//    }
+//    private static int profit(int capacity, int[] val, int[] wt, int idx, int[][] dp){
+//        if(idx == val.length) return 0;
+//        if(dp[idx][capacity] != -1) return dp[idx][capacity];
+//        int skip = profit(capacity, val, wt, idx+1, dp);
+//        if(capacity < wt[idx]) return dp[idx][capacity] = skip;
+//        int pick = val[idx] + profit(capacity-wt[idx], val, wt, idx, dp); // unlimited son no idx+1
+//        return dp[idx][capacity] = Math.max(pick, skip);
+//    }
 }

@@ -21,26 +21,52 @@ public class LengthOfLongestSubsequenceThatSumsToTarget {
         if(ans == -1) System.out.println("There is not any subsequence in " + arr + " that sums to " + target);
         else System.out.println("Length of longest subsequence in "+arr+" that sum to "+target+" is "+ans);
     }
+
+    // tabulation
     private static int lengthOfLongestSubsequence(List<Integer> arr, int target) {
         int n = arr.size();
-        int[][] dp = new int[n][target+1];
+        int[][] dp = new int[n][target + 1];
         for (int i = 0; i < dp.length; i++) {
-            for (int j = 0; j < dp[0].length; j++) dp[i][j] = -2;
+            for (int j = 0; j < dp[0].length; j++) {
+                int skip = (i > 0) ? dp[i - 1][j] : ((j == 0) ? 0 : -1);
+                int pick = -1;
+                if (i > 0) {
+                    if (j >= arr.get(i) && dp[i - 1][j - arr.get(i)] != -1) {
+                        pick = dp[i - 1][j - arr.get(i)] + 1;
+                    }
+                } else {
+                    // Base case for first element
+                    if (j == arr.get(0))
+                        pick = 1;
+                }
+                dp[i][j] = Math.max(skip, pick);
+            }
         }
-        return helper(arr, target, 0, dp);
+
+        return dp[n - 1][target];
     }
 
-    private static int helper(List<Integer> arr, int target, int idx, int[][] dp) {
-        if (idx >= arr.size()) {
-            if(target == 0) return 0;
-            return -1;
-        }
-        if (dp[idx][target] != -2) return dp[idx][target];
-        int skip = helper(arr, target, idx + 1, dp);
-        if (target - arr.get(idx) < 0) return dp[idx][target] = skip;
-        int pick = -1;
-        int res = helper(arr, target - arr.get(idx), idx + 1, dp);
-        if(res != -1) pick = 1+ res;
-        return dp[idx][target] = Math.max(pick, skip);
-    }
+    // memoization
+//    private static int lengthOfLongestSubsequence(List<Integer> arr, int target) {
+//        int n = arr.size();
+//        int[][] dp = new int[n][target+1];
+//        for (int i = 0; i < dp.length; i++) {
+//            for (int j = 0; j < dp[0].length; j++) dp[i][j] = -2;
+//        }
+//        return helper(arr, target, 0, dp);
+//    }
+//
+//    private static int helper(List<Integer> arr, int target, int idx, int[][] dp) {
+//        if (idx >= arr.size()) {
+//            if(target == 0) return 0;
+//            return -1;
+//        }
+//        if (dp[idx][target] != -2) return dp[idx][target];
+//        int skip = helper(arr, target, idx + 1, dp);
+//        if (target - arr.get(idx) < 0) return dp[idx][target] = skip;
+//        int pick = -1;
+//        int res = helper(arr, target - arr.get(idx), idx + 1, dp);
+//        if(res != -1) pick = 1+ res;
+//        return dp[idx][target] = Math.max(pick, skip);
+//    }
 }

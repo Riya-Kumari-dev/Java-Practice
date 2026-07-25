@@ -24,23 +24,38 @@ public class VisitArrayPositionsToMaximiseScore {
         System.out.println("Maximum score we can get is "+maxScore(arr, x));
     }
 
+    private static long maxScore(int[] arr, int x) {
+        int n = arr.length;
+        long[][] dp = new long[n+1][2];
+        dp[0][0] = arr[0];
+        int parity = arr[0] % 2;
+        for(int i=n-1; i>=1; i--){
+            for(int j=0; j<2; j++){
+                long skip = dp[i+1][j];
+                long take = arr[i] + dp[i+1][arr[i]%2];
+                if(arr[i]%2 != j) take -= x;
+                dp[i][j] = Math.max(take,skip);
+            }
+        }
+        return arr[0] + dp[1][arr[0]%2];
+    }
     // memoization
     // TC = O(2*n), SC = O(2*n)
-    private static long maxScore(int[] arr, int x) {
-        long[][] dp = new long[arr.length][2];
-        for(int i=0; i<dp.length; i++){
-            for(int j=0; j<dp[0].length; j++) dp[i][j] = -1;
-        }
-        return arr[0] + helper(1, arr, x, arr[0] % 2, dp); // initially arr[0] score and arr[0] %2 is the parity
-    }
-    private static long helper(int i, int[] arr, int x, int parity, long[][] dp){
-        if(i==arr.length) return 0;
-        if(dp[i][parity] != -1) return dp[i][parity];
-        long skip = helper(i+1, arr, x, parity,dp);
-        long take = arr[i] + helper(i+1, arr, x, arr[i] % 2, dp);
-        if(arr[i] % 2 != parity) take -= x; // parities differ so subtract x
-        return dp[i][parity] = Math.max(take, skip);
-    }
+//    private static long maxScore(int[] arr, int x) {
+//        long[][] dp = new long[arr.length][2];
+//        for(int i=0; i<dp.length; i++){
+//            for(int j=0; j<dp[0].length; j++) dp[i][j] = -1;
+//        }
+//        return arr[0] + helper(1, arr, x, arr[0] % 2, dp); // initially arr[0] score and arr[0] %2 is the parity
+//    }
+//    private static long helper(int i, int[] arr, int x, int parity, long[][] dp){
+//        if(i==arr.length) return 0;
+//        if(dp[i][parity] != -1) return dp[i][parity];
+//        long skip = helper(i+1, arr, x, parity,dp);
+//        long take = arr[i] + helper(i+1, arr, x, arr[i] % 2, dp);
+//        if(arr[i] % 2 != parity) take -= x; // parities differ so subtract x
+//        return dp[i][parity] = Math.max(take, skip);
+//    }
 
     // recursion // time limit exceeded
 //    private static long maxScore(int[] arr, int x) {
