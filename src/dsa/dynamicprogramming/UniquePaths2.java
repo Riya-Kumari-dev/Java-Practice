@@ -22,21 +22,42 @@ public class UniquePaths2 {
         System.out.print("Number of possible unique paths that the robot can take to reach the bottom-right corner : "+uniquePathsWithObstacles(grid));
     }
 
+    // space optimized
     private static int uniquePathsWithObstacles(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
-        int[][] dp = new int[m][n];
+        int[][] dp = new int[2][n];
         for(int i=0; i<m; i++){
             for(int j=0; j<n; j++){
-                if(grid[i][j] == 1) dp[i][j] = 0; // obstacle
-                else if(i==0 && j==0) dp[i][j] = 1; // obstacle hota to upar hi pakda jata so no obstacle
-                else if(j==0) dp[i][j] = dp[i-1][j]; // upar se
-                else if(i==0) dp[i][j] = dp[i][j-1]; // left wala
+                if(grid[i][j] == 1) dp[1][j] = 0; // obstacle
+                else if(i==0 && j==0) dp[1][j] = 1; // obstacle hota to upar hi pakda jata so no obstacle
+                else if(j==0) dp[1][j] = dp[0][j]; // upar se
+                else if(i==0) dp[1][j] = dp[1][j-1]; // left wala
                 else{
-                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                    dp[1][j] = dp[0][j] + dp[1][j-1];
                 }
+
             }
+            for(int j=0; j<n; j++) dp[0][j] = dp[1][j];
         }
-        return dp[m-1][n-1];
+        return dp[1][n-1];
     }
+    // tabulation
+//    private static int uniquePathsWithObstacles(int[][] grid) {
+//        int m = grid.length;
+//        int n = grid[0].length;
+//        int[][] dp = new int[m][n];
+//        for(int i=0; i<m; i++){
+//            for(int j=0; j<n; j++){
+//                if(grid[i][j] == 1) dp[i][j] = 0; // obstacle
+//                else if(i==0 && j==0) dp[i][j] = 1; // obstacle hota to upar hi pakda jata so no obstacle
+//                else if(j==0) dp[i][j] = dp[i-1][j]; // upar se
+//                else if(i==0) dp[i][j] = dp[i][j-1]; // left wala
+//                else{
+//                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+//                }
+//            }
+//        }
+//        return dp[m-1][n-1];
+//    }
 }

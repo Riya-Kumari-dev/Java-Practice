@@ -1,6 +1,7 @@
 package dsa.dynamicprogramming;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,29 +23,53 @@ public class LengthOfLongestSubsequenceThatSumsToTarget {
         else System.out.println("Length of longest subsequence in "+arr+" that sum to "+target+" is "+ans);
     }
 
-    // tabulation
+    // space optimized
     private static int lengthOfLongestSubsequence(List<Integer> arr, int target) {
         int n = arr.size();
-        int[][] dp = new int[n][target + 1];
-        for (int i = 0; i < dp.length; i++) {
-            for (int j = 0; j < dp[0].length; j++) {
-                int skip = (i > 0) ? dp[i - 1][j] : ((j == 0) ? 0 : -1);
+        int[][] dp = new int[2][target + 1];
+
+        Arrays.fill(dp[0], -1);
+        Arrays.fill(dp[1], -1);
+        dp[0][0] = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= target; j++) {
+                int skip = dp[0][j];
                 int pick = -1;
-                if (i > 0) {
-                    if (j >= arr.get(i) && dp[i - 1][j - arr.get(i)] != -1) {
-                        pick = dp[i - 1][j - arr.get(i)] + 1;
-                    }
-                } else {
-                    // Base case for first element
-                    if (j == arr.get(0))
-                        pick = 1;
+                if (j >= arr.get(i) && dp[0][j - arr.get(i)] != -1) {
+                    pick = dp[0][j - arr.get(i)] + 1;
                 }
-                dp[i][j] = Math.max(skip, pick);
+                dp[1][j] = Math.max(skip, pick);
             }
+
+            for(int j=0; j<= target; j++) dp[0][j] = dp[1][j];
         }
 
-        return dp[n - 1][target];
+        return dp[0][target];
     }
+    // tabulation
+//    private static int lengthOfLongestSubsequence(List<Integer> arr, int target) {
+//        int n = arr.size();
+//        int[][] dp = new int[n][target + 1];
+//        for (int i = 0; i < dp.length; i++) {
+//            for (int j = 0; j < dp[0].length; j++) {
+//                int skip = (i > 0) ? dp[i - 1][j] : ((j == 0) ? 0 : -1);
+//                int pick = -1;
+//                if (i > 0) {
+//                    if (j >= arr.get(i) && dp[i - 1][j - arr.get(i)] != -1) {
+//                        pick = dp[i - 1][j - arr.get(i)] + 1;
+//                    }
+//                } else {
+//                    // Base case for first element
+//                    if (j == arr.get(0))
+//                        pick = 1;
+//                }
+//                dp[i][j] = Math.max(skip, pick);
+//            }
+//        }
+//
+//        return dp[n - 1][target];
+//    }
 
     // memoization
 //    private static int lengthOfLongestSubsequence(List<Integer> arr, int target) {

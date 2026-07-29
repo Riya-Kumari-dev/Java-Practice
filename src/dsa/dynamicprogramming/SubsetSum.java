@@ -20,25 +20,45 @@ public class SubsetSum {
         else System.out.println("No, " + Arrays.toString(arr) + " has not any subset whose sum equals to " + target);
     }
 
-    // tabulation
+    // space optimized
     public static boolean isSubsetSum(int[] arr, int target) {
         int n = arr.length;
-        // idx -> 0 to n-1 and target -> target to 0
-        int[][] dp = new int[n][target+1];
-        for (int i = 0; i < dp.length; i++) {
-            for (int j = 0; j < dp[0].length; j++) {
+        int[][] dp = new int[2][target+1];
+        dp[0][0] = 1; // base case
+        for (int i=0; i<n; i++) {
+            for (int j = 0; j <= target; j++) {
                 boolean ans;
-                boolean skip = ((i>0) ? (dp[i-1][j] == 1) : j==0); // skip = helper(arr, target, idx - 1, dp);
-                if(j-arr[i] < 0) ans = skip;
-                else{
-                    boolean pick = ((i>0) ? (dp[i-1][j-arr[i]] ==1) : j==0); // pick = helper(arr, target - arr[idx], idx - 1, dp);
+                boolean skip = dp[0][j] == 1; // skip = helper(arr, target, idx - 1, dp);
+                if (j - arr[i] < 0) ans = skip;
+                else {
+                    boolean pick = dp[0][j - arr[i]] == 1;
                     ans = pick || skip;
                 }
-                dp[i][j] = (ans) ? 1 : 0;
+                dp[1][j] = (ans) ? 1 : 0;
             }
+            for (int j = 0; j <= target; j++) dp[0][j] = dp[1][j];
         }
-        return dp[n-1][target] == 1;
+        return dp[0][target] == 1;
     }
+    // tabulation
+//    public static boolean isSubsetSum(int[] arr, int target) {
+//        int n = arr.length;
+//        // idx -> 0 to n-1 and target -> target to 0
+//        int[][] dp = new int[n][target+1];
+//        for (int i = 0; i < dp.length; i++) {
+//            for (int j = 0; j < dp[0].length; j++) {
+//                boolean ans;
+//                boolean skip = ((i>0) ? (dp[i-1][j] == 1) : j==0); // skip = helper(arr, target, idx - 1, dp);
+//                if(j-arr[i] < 0) ans = skip;
+//                else{
+//                    boolean pick = ((i>0) ? (dp[i-1][j-arr[i]] ==1) : j==0); // pick = helper(arr, target - arr[idx], idx - 1, dp);
+//                    ans = pick || skip;
+//                }
+//                dp[i][j] = (ans) ? 1 : 0;
+//            }
+//        }
+//        return dp[n-1][target] == 1;
+//    }
 
     // memoization
     // TC = O(n*target) , AS = O(n*target)

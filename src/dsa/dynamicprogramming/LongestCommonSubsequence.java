@@ -9,20 +9,36 @@ public class LongestCommonSubsequence {
         String s1 = sc.nextLine();
         System.out.print("Enter second string : ");
         String s2 = sc.nextLine();
-        System.out.println("Longest common subsequence in "+s1+" and "+s2+" is "+lcs(s1,s2));
+        System.out.println("Longest common subsequence in "+s1+" and "+s2+" is "+longestCommonSubsequence(s1,s2));
+    }
+
+    // space optimized , TC = O(m*n), AS = (n)
+    public static int longestCommonSubsequence(String s1, String s2) {
+        int m = s1.length();
+        int n = s2.length();
+        int[][] dp = new int[2][n + 1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s1.charAt(i - 1) != s2.charAt(j - 1)) dp[1][j] = Math.max(dp[0][j], dp[1][j - 1]);
+                else dp[1][j] = 1 + dp[0][j - 1];
+            }
+            // copy the 1st row to 0th row for next time
+            for (int j = 0; j <= n; j++) dp[0][j] = dp[1][j];
+        }
+        return dp[1][n];
     }
     // tabulation
-    private static int lcs(String s1, String s2) {
-        int m = s1.length(); int n = s2.length();
-        int[][] dp = new int[m+1][n+1];
-        for(int i=1; i<=m; i++){
-            for(int j=1; j<=n; j++) {
-                if(s1.charAt(i-1) != s2.charAt(j-1)) dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
-                else dp[i][j] = 1 + dp[i-1][j-1];
-            }
-        }
-        return dp[m][n];
-    }
+//    private static int lcs(String s1, String s2) {
+//        int m = s1.length(); int n = s2.length();
+//        int[][] dp = new int[m+1][n+1];
+//        for(int i=1; i<=m; i++){
+//            for(int j=1; j<=n; j++) {
+//                if(s1.charAt(i-1) != s2.charAt(j-1)) dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+//                else dp[i][j] = 1 + dp[i-1][j-1];
+//            }
+//        }
+//        return dp[m][n];
+//    }
     // tabulation
 //    private static int lcs(String s1, String s2) {
 //        int[][] dp = new int[s1.length()][s2.length()];

@@ -20,24 +20,43 @@ public class CoinChange {
         else System.out.println("Minimum number of coins needed to make up "+amount+" from "+Arrays.toString(coins)+" is "+ans);
     }
 
-    // tabulation
+    // space optimized
     private static int coinChange(int[] coins, int amount) {
-        long[][] dp = new long[coins.length][amount+1];
-        for(int i=0; i<dp.length; i++){
-            for(int j=0; j<dp[0].length; j++){
-                long skip = (i>0) ? dp[i-1][j] : ((j==0) ? 0 : Integer.MAX_VALUE);// skip = helper(coins, i + 1, amount, dp);
-                if(coins[i] > j) dp[i][j] = skip;
+        long[][] dp = new long[2][amount+1];
+        for(int i=0; i<coins.length; i++){
+            for(int j=0; j<=amount; j++){
+                long skip = (i>0) ? dp[0][j] : ((j==0) ? 0 : Integer.MAX_VALUE);// skip = helper(coins, i + 1, amount, dp);
+                if(coins[i] > j) dp[1][j] = skip;
                 else{
                     //int take = helper(coins, i, amount - coins[i], dp);
                     // int pick = (take == Integer.MAX_VALUE) ? take : take + 1; // no need if we have long type
-                    long take = 1 + dp[i][j-coins[i]];
-                    dp[i][j] = Math.min(skip, take);
+                    long take = 1 + dp[1][j-coins[i]];
+                    dp[1][j] = Math.min(skip, take);
                 }
             }
+            for(int j=0; j<=amount; j++) dp[0][j] = dp[1][j];
         }
-        int ans = (int)dp[coins.length-1][amount];
+        int ans = (int)dp[1][amount];
         return (ans == Integer.MAX_VALUE) ? -1 : ans;
     }
+    // tabulation
+//    private static int coinChange(int[] coins, int amount) {
+//        long[][] dp = new long[coins.length][amount+1];
+//        for(int i=0; i<dp.length; i++){
+//            for(int j=0; j<dp[0].length; j++){
+//                long skip = (i>0) ? dp[i-1][j] : ((j==0) ? 0 : Integer.MAX_VALUE);// skip = helper(coins, i + 1, amount, dp);
+//                if(coins[i] > j) dp[i][j] = skip;
+//                else{
+//                    //int take = helper(coins, i, amount - coins[i], dp);
+//                    // int pick = (take == Integer.MAX_VALUE) ? take : take + 1; // no need if we have long type
+//                    long take = 1 + dp[i][j-coins[i]];
+//                    dp[i][j] = Math.min(skip, take);
+//                }
+//            }
+//        }
+//        int ans = (int)dp[coins.length-1][amount];
+//        return (ans == Integer.MAX_VALUE) ? -1 : ans;
+//    }
 
     // memoization
 //    private static int coinChange(int[] coins, int amount) {

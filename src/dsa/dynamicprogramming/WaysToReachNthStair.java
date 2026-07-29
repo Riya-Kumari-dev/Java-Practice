@@ -10,16 +10,30 @@ public class WaysToReachNthStair {
         System.out.println("Total number of ways to reach "+n+"th stair is "+countWays(n));
     }
     // one jump or two jump
-    // Tabulation
+
+    // space optimized
     private static int countWays(int n) {
         if(n<=2) return n;
-        int[] dp = new int[n];
-        dp[0] = 1; dp[1] = 2;
+        int[] dp = new int[3];
+        dp[0] = 1;
+        dp[1] = 2;
         for(int i=2; i<n; i++){
-            dp[i] = dp[i-1] + dp[i-2];
+            dp[2] = dp[0] + dp[1];
+            dp[0] = dp[1];
+            dp[1] = dp[2];
         }
-        return dp[n-1];
+        return dp[2];
     }
+    // Tabulation
+//    private static int countWays(int n) {
+//        if(n<=2) return n;
+//        int[] dp = new int[n];
+//        dp[0] = 1; dp[1] = 2;
+//        for(int i=2; i<n; i++){
+//            dp[i] = dp[i-1] + dp[i-2];
+//        }
+//        return dp[n-1];
+//    }
 
     // memoization
 //    private static int countWays(int n) {

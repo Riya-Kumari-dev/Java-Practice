@@ -23,26 +23,44 @@ public class Knapsack01 {
     // and an integer W representing the maximum capacity of the knapsack (the total weight it can hold).
     //The task is to put the items into the knapsack such that the total value obtained is maximum without exceeding the capacity W.
 
-
-    // tabulation
+    // space optimized
     private static int knapsack(int w, int[] val, int[] wt) {
-        // i -> 0 to n-1 and W -> W to 0
         int n = val.length;
-        int[][] dp = new int[n][w+1];
-        for(int i=0; i<dp.length; i++){
+        int[][] dp = new int[2][w+1];
+        for(int i=0; i<n; i++){
             for(int j=0; j<dp[0].length; j++){
-                int skip = (i>0) ? dp[i-1][j] : 0; // skip =  profit(capacity, val, wt, idx-1, dp);
-                if(wt[i] > j) dp[i][j] = skip;
+                int skip = dp[0][j]; // skip =  profit(capacity, val, wt, idx-1, dp);
+                if(wt[i] > j) dp[1][j] = skip;
                 else{
-                    // pick = val[idx] + profit(capacity-wt[idx], val, wt, idx-1, dp);
+                    // pick = val[idx] + profit(capacity-wt[idx], val, wt, idx, dp);
                     int pick = val[i];
-                    pick += ((i>0) ? dp[i-1][j-wt[i]] : 0);
-                    dp[i][j] = Math.max(pick, skip);
+                    pick += dp[0][j-wt[i]];
+                    dp[1][j] = Math.max(pick, skip);
                 }
             }
+            for(int j=0; j<dp[0].length; j++) dp[0][j] = dp[1][j];
         }
-        return dp[n-1][w];
+        return dp[1][w];
     }
+    // tabulation
+//    private static int knapsack(int w, int[] val, int[] wt) {
+//        // i -> 0 to n-1 and W -> W to 0
+//        int n = val.length;
+//        int[][] dp = new int[n][w+1];
+//        for(int i=0; i<dp.length; i++){
+//            for(int j=0; j<dp[0].length; j++){
+//                int skip = (i>0) ? dp[i-1][j] : 0; // skip =  profit(capacity, val, wt, idx-1, dp);
+//                if(wt[i] > j) dp[i][j] = skip;
+//                else{
+//                    // pick = val[idx] + profit(capacity-wt[idx], val, wt, idx-1, dp);
+//                    int pick = val[i];
+//                    pick += ((i>0) ? dp[i-1][j-wt[i]] : 0);
+//                    dp[i][j] = Math.max(pick, skip);
+//                }
+//            }
+//        }
+//        return dp[n-1][w];
+//    }
 
     // TC = O(n*W) and AS = O(n*w)
 
