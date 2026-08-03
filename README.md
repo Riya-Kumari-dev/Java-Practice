@@ -64,6 +64,7 @@ Java-Practice
 |     |     |--- sorting
 |     |     |--- prefixsum
 |     |     |--- slidingwindow
+|     |     |--- dynamicprogramming
 |--- README.md
 ```
 
