@@ -1,11 +1,11 @@
 package dsa.dynamicprogramming;
 
-import dsa.collections.binarytree.Node;
+import dsa.datastructures.binarytree.Node;
 
 import java.util.Scanner;
 
-import static dsa.collections.binarytree.ConstructBTUsingBFS.construct;
-import static dsa.collections.binarytree.ConstructBTUsingBFS.print;
+import static dsa.datastructures.binarytree.ConstructBTUsingBFS.construct;
+import static dsa.datastructures.binarytree.ConstructBTUsingBFS.print;
 
 public class BalancedBinaryTree {
     static void main(String[] args) {
