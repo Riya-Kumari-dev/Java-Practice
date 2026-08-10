@@ -47,10 +47,12 @@ Java-Practice
 |     |    
 |     |--- exceptionhandling
 |     |
+|     |--- collections
+|     |
 |     |--- dsa
 |     |     |--- arrays
 |     |     |--- strings
-|     |     |--- collections
+|     |     |--- datastructures
 |     |     |     |--- arraylist
 |     |     |     |--- linkedlist
 |     |     |     |--- queue
@@ -65,6 +67,7 @@ Java-Practice
 |     |     |--- prefixsum
 |     |     |--- slidingwindow
 |     |     |--- dynamicprogramming
+|     |     |--- backtracking
 |--- README.md
 ```
 
