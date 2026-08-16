@@ -49,6 +49,8 @@ Java-Practice
 |     |
 |     |--- collections
 |     |
+|     |--- lambdaexpression
+|     |
 |     |--- dsa
 |     |     |--- arrays
 |     |     |--- strings
