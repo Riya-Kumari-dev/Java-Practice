@@ -6,7 +6,7 @@ public class HashSetDemo {
     /* HashSet :
     -> Implements the Set interface.
     -> unique elements + fast operations + no guaranteed order.
-    -> Backed by a HashMap. The hash table allows efficient insertion, deletion and searching.
+    -> Backed by a HashMapDemo. The hash table allows efficient insertion, deletion and searching.
     -> We generally say O(1) average, not simply O(1) because collisions can affect performance.
     * */
     static void main(String[] args) {
