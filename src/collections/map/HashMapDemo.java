@@ -1,6 +1,5 @@
-package collections;
+package collections.map;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 public class HashMapDemo {
