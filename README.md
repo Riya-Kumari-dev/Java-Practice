@@ -73,6 +73,7 @@ Java-Practice
 |     |     |--- slidingwindow
 |     |     |--- dynamicprogramming
 |     |     |--- backtracking
+|     |     |--- bitmanipulation
 |--- README.md
 ```
 
