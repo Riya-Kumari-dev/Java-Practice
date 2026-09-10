@@ -28,11 +28,23 @@ public class NumberOfProvinces {
         boolean[] isVisited = new boolean[n];
         for (int i = 0; i < n; i++) {
             if (!isVisited[i]) {
-                bfs(i, isVisited, isConnected);
+//                bfs(i, isVisited, isConnected);
+                dfs(i, isVisited, isConnected);
                 count++;
             }
         }
         return count;
+    }
+
+    private static void dfs(int i, boolean[] isVisited, int[][] isConnected) {
+        isVisited[i] = true;
+        int n = isConnected.length;
+        for (int j = 0; j < n; j++) {
+            if (!isVisited[j] && isConnected[i][j] == 1) {
+                dfs(j, isVisited, isConnected);
+                isVisited[j] = true;
+            }
+        }
     }
 
     public static void bfs(int i, boolean[] isVisited, int[][] isConnected) {

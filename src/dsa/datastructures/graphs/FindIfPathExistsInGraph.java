@@ -36,19 +36,33 @@ public class FindIfPathExistsInGraph {
             adj.get(edge[1]).add(edge[0]);
         }
         boolean[] isVisited = new boolean[n];
+        dfs(isVisited, adj, source, destination);
+        return isVisited[destination];
+    }
+
+    private static void dfs(boolean[] isVisited, List<List<Integer>> adj, int source, int destination) {
+        isVisited[source] = true;
+        for(int vertex : adj.get(source)){
+            if(!isVisited[vertex]) {
+                dfs(isVisited, adj, vertex, destination);
+                if(vertex == destination) return;
+            }
+        }
+    }
+
+    private static void bfs(boolean[] isVisited, List<List<Integer>> adj, int source, int destination) {
         isVisited[source] = true;
         Queue<Integer> q = new LinkedList<>();
         q.add(source);
-        while(!q.isEmpty()){
+        while(!q.isEmpty()) {
             int front = q.remove();
-            for(int vertex : adj.get(front)){
-                if(!isVisited[vertex]) {
+            for (int vertex : adj.get(front)) {
+                if (!isVisited[vertex]) {
                     q.add(vertex);
                     isVisited[vertex] = true;
-                    if(vertex == destination) return true;
+                    if (vertex == destination) return;
                 }
             }
         }
-        return isVisited[destination];
     }
 }

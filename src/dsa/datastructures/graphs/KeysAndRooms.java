@@ -33,6 +33,24 @@ public class KeysAndRooms {
     private static boolean canVisitAllRooms(List<List<Integer>> rooms) {
         int n = rooms.size();
         boolean[] isVisited = new boolean[n];
+        // bfs(isVisited, rooms);
+        dfs(0, isVisited, rooms);
+        for(int i=0; i<n; i++){
+            if(!isVisited[i]) return false;
+        }
+        return true;
+    }
+
+    private static void dfs(int start, boolean[] isVisited, List<List<Integer>> rooms) {
+        isVisited[start] = true;
+        for(int roomKey : rooms.get(start)){
+            if(!isVisited[roomKey]){
+                dfs(roomKey, isVisited, rooms);
+            }
+        }
+    }
+
+    private static void bfs(boolean[] isVisited, List<List<Integer>> rooms) {
         isVisited[0] = true;
         Queue<Integer> q = new LinkedList<>();
         q.add(0);
@@ -46,9 +64,5 @@ public class KeysAndRooms {
                 }
             }
         }
-        for(int i=0; i<n; i++){
-            if(!isVisited[i]) return false;
-        }
-        return true;
     }
 }
