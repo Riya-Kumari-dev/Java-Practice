@@ -67,6 +67,7 @@ Java-Practice
 |     |     |     |--- hashset
 |     |     |     |--- hashmap
 |     |     |     |--- priorityqueue
+|     |     |     |--- graphs
 |     |     |--- recursion
 |     |     |--- sorting
 |     |     |--- prefixsum
