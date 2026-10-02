@@ -75,6 +75,8 @@ Java-Practice
 |     |     |--- dynamicprogramming
 |     |     |--- backtracking
 |     |     |--- bitmanipulation
+|     |     |--- enums
+|     |     |--- annotations
 |--- README.md
 ```
 
