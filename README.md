@@ -54,6 +54,8 @@ Java-Practice
 |     |
 |     |--- lambdaexpression
 |     |
+|     |--- multithreading
+|     |
 |     |--- dsa
 |     |     |--- arrays
 |     |     |--- strings
