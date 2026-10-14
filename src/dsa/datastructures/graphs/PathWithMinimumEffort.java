@@ -65,6 +65,7 @@ public class PathWithMinimumEffort {
             Triplet top = pq.remove();
             int row = top.row;
             int col = top.col;
+            if(row == m-1 && col == n-1) break;
             if (top.effort > eff[row][col]) // the next effort coming is greater than prev one so ignore
                 continue;
             for(int i=0; i<4; i++){
