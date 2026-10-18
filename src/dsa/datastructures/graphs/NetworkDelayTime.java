@@ -1,6 +1,7 @@
 package dsa.datastructures.graphs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,7 +25,32 @@ public class NetworkDelayTime {
         int src = sc.nextInt();
         System.out.println("Minimum time to reach network to all the vertices from "+src+" is "+networkDelayTime(n, times, src));
     }
+
+    // using Bellman-Ford Algorithm
     private static int networkDelayTime(int n, int[][] times, int src) {
+        int[] time = new int[n+1];
+        Arrays.fill(time, Integer.MAX_VALUE);
+        time[src] = 0;
+        for(int i=1; i<n; i++){ // n-1 edges travel
+            for(int j=0; j<times.length; j++){
+                int u = times[j][0];
+                int v = times[j][1];
+                int wt = times[j][2];
+                if(time[u] != Integer.MAX_VALUE && time[u] + wt < time[v]){
+                    time[v] = time[u]+wt;
+                }
+            }
+        }
+        int max = 0;
+        for(int i=1; i<=n; i++){
+            if(time[i] == Integer.MAX_VALUE) return -1;
+            max = Math.max(time[i], max);
+        }
+        return max;
+    }
+
+    // using Dijkstra algorithm
+    /*private static int networkDelayTime(int n, int[][] times, int src) {
         // create adjacency list
         List<List<Pair>> adj = new ArrayList<>();
         for (int i = 0; i<=n; i++) {
@@ -44,5 +70,5 @@ public class NetworkDelayTime {
             max = Math.max(max,ans.get(i));
         }
         return max;
-    }
+    }*/
 }
