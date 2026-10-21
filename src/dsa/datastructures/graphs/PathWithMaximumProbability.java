@@ -33,53 +33,82 @@ public class PathWithMaximumProbability {
         System.out.println("The maximum probability for going from "+start+" to "+end+" is "+maxProbability(n, edges, succProb, start, end));
     }
 
-    static class Pair implements Comparable<Pair> {
-        int val;
-        double prob;
-        Pair(int val, double prob) {
-            this.val = val;
-            this.prob = prob;
-        }
-        public int compareTo(Pair p) {
-            return Double.compare(this.prob, p.prob);
-        }
-    }
-
-    private static double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
-        List<List<Pair>> adj = new ArrayList<>();
+    private static double maxProbability(int n, int[][] edges, double[] succProb, int src, int des) {
+        ArrayList<Double> dist = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
+            dist.add(0.0); // 0<= prob <= 1 , so minProb = 0
         }
-        for (int i = 0; i < edges.length; i++) {
-            int[] edge = edges[i];
-            adj.get(edge[0]).add(new Pair(edge[1], succProb[i]));
-            adj.get(edge[1]).add(new Pair(edge[0], succProb[i]));
-        }
-        ArrayList<Double> ans = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            ans.add(0.0); // 0<= prob <= 1 , so minProb = 0
-        }
-        dijkstraAlgo(adj, start, ans);
-        return ans.get(end);
-    }
-
-    private static void dijkstraAlgo(List<List<Pair>> adj, int start, ArrayList<Double> ans) {
-        PriorityQueue<Pair> pq = new PriorityQueue<>(Collections.reverseOrder()); // maxHeap
-        pq.add(new Pair(start, 1)); // start par to already hai so probability to be there is 1
-        ans.set(start, 1.0);
-        while (!pq.isEmpty()) {
-            Pair top = pq.remove();
-            if (top.prob < ans.get(top.val))
-                continue;
-            for (Pair p : adj.get(top.val)) {
-                int ele = p.val;
-                double prob = p.prob;
-                double totalProb = prob * top.prob; // probability is multiplicative in nature
-                if (totalProb > ans.get(ele)) {
-                    ans.set(ele, totalProb);
-                    pq.add(new Pair(ele, totalProb));
+        dist.set(src,1.0);
+        // Relax all edges n-1 times
+        for (int i = 1; i < n; i++) {
+            boolean updated = false;
+            for (int j = 0; j < edges.length; j++) {
+                int u = edges[j][0];
+                int v = edges[j][1];
+                double wt = succProb[j];
+                // Relax u -> v
+                if (dist.get(u) * wt > dist.get(v)) {
+                    dist.set(v, dist.get(u) * wt);
+                    updated = true;
+                }
+                // Relax v -> u
+                if (dist.get(v) * wt > dist.get(u)) {
+                    dist.set(u, dist.get(v) * wt);
+                    updated = true;
                 }
             }
+            if(!updated) break;
         }
+        return dist.get(des);
     }
+
+//    static class Pair implements Comparable<Pair> {
+//        int val;
+//        double prob;
+//        Pair(int val, double prob) {
+//            this.val = val;
+//            this.prob = prob;
+//        }
+//        public int compareTo(Pair p) {
+//            return Double.compare(this.prob, p.prob);
+//        }
+//    }
+//
+//    private static double maxProbability(int n, int[][] edges, double[] succProb, int start, int end) {
+//        List<List<Pair>> adj = new ArrayList<>();
+//        for (int i = 0; i < n; i++) {
+//            adj.add(new ArrayList<>());
+//        }
+//        for (int i = 0; i < edges.length; i++) {
+//            int[] edge = edges[i];
+//            adj.get(edge[0]).add(new Pair(edge[1], succProb[i]));
+//            adj.get(edge[1]).add(new Pair(edge[0], succProb[i]));
+//        }
+//        ArrayList<Double> ans = new ArrayList<>();
+//        for (int i = 0; i < n; i++) {
+//            ans.add(0.0); // 0<= prob <= 1 , so minProb = 0
+//        }
+//        dijkstraAlgo(adj, start, ans);
+//        return ans.get(end);
+//    }
+//
+//    private static void dijkstraAlgo(List<List<Pair>> adj, int start, ArrayList<Double> ans) {
+//        PriorityQueue<Pair> pq = new PriorityQueue<>(Collections.reverseOrder()); // maxHeap
+//        pq.add(new Pair(start, 1)); // start par to already hai so probability to be there is 1
+//        ans.set(start, 1.0);
+//        while (!pq.isEmpty()) {
+//            Pair top = pq.remove();
+//            if (top.prob < ans.get(top.val))
+//                continue;
+//            for (Pair p : adj.get(top.val)) {
+//                int ele = p.val;
+//                double prob = p.prob;
+//                double totalProb = prob * top.prob; // probability is multiplicative in nature
+//                if (totalProb > ans.get(ele)) {
+//                    ans.set(ele, totalProb);
+//                    pq.add(new Pair(ele, totalProb));
+//                }
+//            }
+//        }
+//    }
 }

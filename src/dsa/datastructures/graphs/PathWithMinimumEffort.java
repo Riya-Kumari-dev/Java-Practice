@@ -30,7 +30,45 @@ public class PathWithMinimumEffort {
         }
         System.out.println("Minimum effort required to travel from the top-left cell to the bottom-right cell in the given grid is "+minimumEffortPath(heights));
     }
-    static class Triplet implements Comparable<Triplet> {
+
+    // Bellman Ford approach :
+    // TC = O(V^2) where V is n*m
+    private static int minimumEffortPath(int[][] heights) {
+        int m = heights.length; // row
+        int n = heights[0].length; // col
+        int[][] eff = new int[m][n];
+        for (int[] row : eff) {
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+        eff[0][0] = 0;
+        int[] r = {-1, 0, 1, 0};
+        int[] c = {0, -1, 0, 1};
+        // Relax edges repeatedly
+        for (int k = 1; k < n * m; k++) {
+            boolean updated = false;
+            for (int row = 0; row < m; row++) {
+                for (int col = 0; col < n; col++) {
+                    if (eff[row][col] == Integer.MAX_VALUE) continue;
+                    for (int i = 0; i < 4; i++) {
+                        int newRow = row + r[i];
+                        int newCol = col + c[i];
+                        if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n) {
+                            int diff = Math.abs( heights[row][col] - heights[newRow][newCol] );
+                            int newEffort = Math.max(eff[row][col], diff);
+                            if (newEffort < eff[newRow][newCol]) {
+                                eff[newRow][newCol] = newEffort;
+                                updated = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if (!updated) break;
+        }
+        return eff[m - 1][n - 1];
+    }
+
+    /*static class Triplet implements Comparable<Triplet> {
         int row;
         int col;
         int effort;
@@ -80,5 +118,5 @@ public class PathWithMinimumEffort {
             }
         }
         return eff[m - 1][n - 1];
-    }
+    }*/
 }

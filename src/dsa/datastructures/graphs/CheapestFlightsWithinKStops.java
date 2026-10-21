@@ -31,7 +31,32 @@ public class CheapestFlightsWithinKStops {
         System.out.println("The cheapest price from "+src+" to "+dst+" is "+findCheapestPrice(n,flights, src, dst, k));
     }
 
-    static class Pair{
+    // Bellman Ford Approach
+    // TC = O((k + 1) × E), where E is the number of flights.
+    private static int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        int[] ans = new int[n];
+        Arrays.fill(ans, Integer.MAX_VALUE);
+        ans[src] = 0;
+        for(int i=0; i<=k; i++){ // for k stops at most k+1 flights
+            // you must use a copy of the distance array in each iteration.
+            // Because otherwise, an update in the current iteration could be used immediately to travel through multiple flights, violating the stop limit.
+            int temp[] = ans.clone();
+            for(int j=0; j<flights.length; j++){
+                int u = flights[j][0];
+                int v = flights[j][1];
+                int wt = flights[j][2];
+                if(ans[u] != Integer.MAX_VALUE && temp[v] > ans[u]+wt){
+                    temp[v] = ans[u]+wt;
+                }
+            }
+            ans = temp;
+        }
+        if(ans[dst] == Integer.MAX_VALUE) return -1;
+        return ans[dst];
+    }
+
+    
+    /*static class Pair{
         int val;
         int cost;
         Pair(int val, int cost){
@@ -78,7 +103,7 @@ public class CheapestFlightsWithinKStops {
         }
         if(ans[dst] == Integer.MAX_VALUE) return -1;
         return ans[dst];
-    }
+    }*/
 
 //    static class Triplet implements Comparable<Triplet>{
 //        int val;
