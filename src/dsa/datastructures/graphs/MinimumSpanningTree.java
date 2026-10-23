@@ -1,11 +1,11 @@
 package dsa.datastructures.graphs;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
-public class PrimsAlgorithm {
+import static dsa.datastructures.graphs.NumberOfProvinces.leader;
+import static dsa.datastructures.graphs.NumberOfProvinces.union;
+
+public class MinimumSpanningTree {
     /*Given a weighted, undirected, and connected graph with V vertices and a 2D array edges[][],
      where each element edges[i] = [u, v, w] represents an edge between vertices u and v with weight w,
     return the sum of the weights of all edges in the graph's Minimum Spanning Tree (MST).*/
@@ -28,7 +28,36 @@ public class PrimsAlgorithm {
         }
         System.out.println("Sum of the weights of all edges in the given graph's Minimum Spanning Tree is "+spanningTree(n, edges));
     }
-    static class Pair{
+
+    // using Kruskal’s Algorithm using DSU
+    // TC = O(n)+O(E(logE))+O(Eα(n)) => TC = O(n + E(logE))
+    static int[] parent;
+    static int[] size;
+
+    private static int spanningTree(int n, int[][] edges) {
+        parent = new int[n + 1];
+        size = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+        Arrays.sort(edges, (a, b)-> Integer.compare(a[2], b[2]));
+        int minCost = 0;
+        for (int[] arr : edges) {
+            int u = arr[0];
+            int v = arr[1];
+            if (leader(u) != leader(v)) { // cycle detected
+                union(u, v);
+                minCost += arr[2];
+            }
+
+        }
+        return minCost;
+
+    }
+
+    // using Prim's algorithm
+    /*static class Pair{
         int node;
         int weight;
         Pair(int node, int weight){
@@ -88,5 +117,5 @@ public class PrimsAlgorithm {
         System.out.println("]");
 
         return sum;
-    }
+    }*/
 }
