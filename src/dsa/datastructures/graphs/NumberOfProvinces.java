@@ -20,9 +20,98 @@ public class NumberOfProvinces {
         System.out.println("Total number of provinces in the given graph is " + findCircleNum(isConnected));
     }
 
+    // using DSU (Disjoint Set Union)
+    // overall , TC = O(n^2 * alpha(n)) => TC = O(n^2)
+    public static int leader(int a) { // // TC = O(alpha(n))
+        if (parent[a] == a)
+            return a;
+        return parent[a] = leader(parent[a]); // path compression
+    }
+    /*public static int leader(int a) {
+        if (parent[a] == a)
+            return a;
+        return leader(parent[a]);
+    }*/
+
+    // union by size
+    public static void union(int a, int b) {
+        int leaderA = leader(a);
+        int leaderB = leader(b);
+        if (leaderA != leaderB) {
+            if (size[leaderA] > size[leaderB]) {
+                parent[leaderA] = leaderB;
+                size[leaderA] += size[leaderB];
+            } else {
+                parent[leaderB] = leaderA;
+                size[leaderB] += size[leaderA];
+            }
+        }
+    }
+
+    static int[] parent;
+    static int[] size;
+
+    private static int findCircleNum(int[][] isConnected) {
+        int n = isConnected.length;
+        parent = new int[n + 1];
+        size = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j < n; j++) { // undirected graph, so from i+1 avoids duplicate connections and diagonal
+                // edges is from i+1 to j+1
+                if (i != j && isConnected[i][j] == 1) {
+                    union(i + 1, j + 1);
+                }
+            }
+        }
+        int count = 0;
+        for (int i = 1; i <= n; i++) {
+            if (parent[i] == i)
+                count++;
+        }
+        return count;
+    }
+
+    // TC = O(n^3)
+    /*public static int leader(int a){
+        if(parent[a] == a) return a;
+        return leader(parent[a]);
+    }
+    private static void union(int a, int b){
+        int leaderA = leader(a);
+        int leaderB = leader(b);
+        if(leaderA != leaderB){
+            parent[leaderA] = leaderB;
+        }
+    }
+    static int[] parent;
+    private static int findCircleNum(int[][] isConnected) {
+        int n = isConnected.length;
+        parent = new int[n+1];
+        for(int i=1; i<=n; i++){
+            parent[i] = i;
+        }
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                // edges is from i+1 to j+1
+                if(i!=j && isConnected[i][j] == 1) {
+                    union(i+1, j+1);
+                }
+            }
+        }
+        int count = 0;
+        for(int i=1; i<=n; i++){
+            if(parent[i] == i) count++;
+        }
+        return count;
+    }*/
+
     // TC = O(vertex + 2*edges)
     // TC = O(n^2) (worst case)
-    private static int findCircleNum(int[][] isConnected) {
+    /*private static int findCircleNum(int[][] isConnected) {
         int n = isConnected.length;
         int count = 0;
         boolean[] isVisited = new boolean[n];
@@ -62,5 +151,5 @@ public class NumberOfProvinces {
                 }
             }
         }
-    }
+    }*/
 }
