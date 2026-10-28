@@ -16,6 +16,7 @@ I am consistently improving my programming skills by building logic, solving pro
 - ✅ Object-Oriented Programming
 - ✅ Exception Handling
 - ✅ Lambda Expression
+- ✅ Multithreading
 - 🔄️ Data Structures (In progress)
 
 ---
