@@ -12,12 +12,16 @@ I am consistently improving my programming skills by building logic, solving pro
 - ✅ Loops
 - ✅ Pattern Printing
 - ✅ Methods
-- 🔄️ Collections (In progress)
+- ✅ Collections
 - ✅ Object-Oriented Programming
+- ✅ DSA
 - ✅ Exception Handling
 - ✅ Lambda Expression
 - ✅ Multithreading
-- 🔄️ Data Structures (In progress)
+- ✅ Enums
+- ✅ Annotations
+- 🔄️ Stream API (in progress)
+- ✅ File Handling
 
 ---
 
@@ -78,9 +82,14 @@ Java-Practice
 |     |     |--- dynamicprogramming
 |     |     |--- backtracking
 |     |     |--- bitmanipulation
-|     |     |--- enums
-|     |     |--- annotations
-|     |     |--- filehandling
+|     |
+|     |--- enums
+|     |
+|     |--- annotations
+|     |
+|     |--- streamapi
+|     |     
+|     |--- filehandling
 |--- README.md
 ```
 
